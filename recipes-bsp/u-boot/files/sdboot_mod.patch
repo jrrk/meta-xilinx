@@ -1,0 +1,17 @@
+diff --git a/include/configs/xilinx_zynqmp.h b/include/configs/xilinx_zynqmp.h
+index 9371dbb..6b8d6b7 100644
+--- a/include/configs/xilinx_zynqmp.h
++++ b/include/configs/xilinx_zynqmp.h
+@@ -223,10 +223,8 @@
+ 			"echo Running uenvcmd ...; " \
+ 			"run uenvcmd; " \
+ 		"fi\0" \
+-	"sdboot=mmc dev $sdbootdev && mmcinfo && run uenvboot || run sdroot$sdbootdev; " \
+-		"load mmc $sdbootdev:$partid $fdt_addr system.dtb && " \
+-		"load mmc $sdbootdev:$partid $kernel_addr Image && " \
+-		"booti $kernel_addr - $fdt_addr\0" \
++	"sdboot=fatload mmc 0 0x3000000 image.ub; " \
++		"bootm 0x3000000\0" \
+ 	"nandboot=nand info && nand read $fdt_addr $fdt_offset $fdt_size && " \
+ 		  "nand read $kernel_addr $kernel_offset $kernel_size && " \
+ 		  "booti $kernel_addr - $fdt_addr\0" \
